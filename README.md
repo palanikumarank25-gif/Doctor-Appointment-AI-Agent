@@ -46,11 +46,11 @@ Production-ready Agentic AI architecture
 
 n8n – Workflow automation
 
-OpenAI / GPT-4.1 – Conversational AI
+Google Gemini model
 
 Google Calendar API – Availability & booking
 
-Google Sheets / Database – Appointment logging
+Google Sheets – Appointment logging
 
 Gmail API – Confirmation emails
 

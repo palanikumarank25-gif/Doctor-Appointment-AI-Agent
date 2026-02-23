@@ -1,0 +1,662 @@
+{
+  "name": "Doctor Appointment Agentic AI",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -640,
+        784
+      ],
+      "id": "788a5880-417a-4d12-9a23-7e8ea103cb10",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "options": {
+          "loadPreviousSession": "memory"
+        }
+      },
+      "id": "4f8fc350-839b-4c71-a8ce-048a43b89033",
+      "name": "Chat Trigger",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -640,
+        416
+      ],
+      "webhookId": "204a6e89-09c7-45ab-9c6b-aac89faadddc"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "palanikumarank25@gmail.com",
+          "mode": "id"
+        },
+        "start": "={{ $fromAI('startDateTime', 'Appointment start date and time in ISO format (e.g., 2024-01-15T10:00:00)', 'string') }}",
+        "end": "={{ $fromAI('endDateTime', 'Appointment end date and time in ISO format', 'string') }}",
+        "additionalFields": {
+          "description": "={{ $fromAI('appointmentDescription', 'Description including patient details and reason for visit', 'string') }}",
+          "summary": "={{ $fromAI('appointmentTitle', 'Title of the appointment', 'string') }}"
+        }
+      },
+      "id": "1fb5d6f9-d336-4e86-9773-d96fb003584c",
+      "name": "Google Calendar - Book Appointment",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -160,
+        768
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "XcOpkiHkR728vZpS",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "=palanikumarank25@gmail.com",
+          "mode": "id",
+          "__regex": "(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)"
+        },
+        "limit": 20,
+        "options": {}
+      },
+      "id": "b7ac9e47-998b-43a1-9675-fffc4b32a52e",
+      "name": "Google Calendar - Check Availability",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        768
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "XcOpkiHkR728vZpS",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $fromAI('patientEmail', '', 'string') || 'palani@nexxora.inc' }}",
+        "subject": "={{ $fromAI('emailSubject', 'Email subject line', 'string', 'Appointment Confirmation') }}",
+        "message": "={{ $fromAI('Message', `HTML email body with appointment details`, 'string') }}",
+        "options": {}
+      },
+      "id": "18f721c3-ec14-44e9-b4ae-7b70e275467d",
+      "name": "Gmail - Send Confirmation",
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        1072,
+        768
+      ],
+      "webhookId": "e1aa0045-4f07-4a06-bc84-06e4e3923d61",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "EmXSO3CVeh3kyHdS",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "14AR1yFZr05OmqGINmNozqudiRTFUONYEHd_GnBL7dAs",
+          "mode": "list",
+          "cachedResultName": "Appointment",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/14AR1yFZr05OmqGINmNozqudiRTFUONYEHd_GnBL7dAs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/14AR1yFZr05OmqGINmNozqudiRTFUONYEHd_GnBL7dAs/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Name__using_to_match_', ``, 'string') }}",
+            "Email": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Email', ``, 'string') }}",
+            "Phone": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Phone', ``, 'string') }}",
+            "Date": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Date', ``, 'string') }}",
+            "Time": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Time', ``, 'string') }}",
+            "Reason/Visit": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Reason_Visit', ``, 'string') }}",
+            "Preferred/Doctor": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Preferred_Doctor', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Time",
+              "displayName": "Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Reason/Visit",
+              "displayName": "Reason/Visit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Preferred/Doctor",
+              "displayName": "Preferred/Doctor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "187444a1-b584-4dd5-8a3f-432ab9b82fe7",
+      "name": "Google Sheets - Log Appointment",
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        832,
+        768
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GubZvG55poaWUFY3",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Hospital Booking AI Agent:\n\n",
+        "height": 80,
+        "width": 464,
+        "color": 6
+      },
+      "id": "7c598027-0a52-4345-86b5-ded84a70bf3c",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -240,
+        -224
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Doctor Schduler Schema\n\nPatient Name, Email, Phone, Booked Date, \tBooked Time, Reason visit, Preferred/Doctor. \n\nThis smart assistant enables patients to easily schedule doctor appointments using text\n\nDoctor information and schedules are managed in Google Sheets.\n\nThe agent checks doctor availability based on up-to-date schedules.\n\nIf the selected doctor is already booked at the requested date and time, the agent alerts the patient and suggests other available time slots.\n\nIf the doctor is available, the agent confirms and books the appointment for the patient.\n\n\n\n\n\n\n\n",
+        "height": 560,
+        "width": 448,
+        "color": 3
+      },
+      "id": "18169315-a863-4c4d-8b3d-eafe2ed4a8d1",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -128,
+        -16
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "modelName": "=models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        768
+      ],
+      "id": "2a363351-cb49-4dc9-8a5b-f3c34f5a930b",
+      "name": "Google Gemini Chat Model",
+      "notesInFlow": false,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "3esHT0j4BiwkzzZW",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1. Stores information across the conversation, like a notepad or memory. \n\n2. In a chat, patients don’t always give all details at once. Simple Memory allows your workflow to “remember” answers (name, phone, reason) and recall them in later steps.",
+        "height": 448,
+        "width": 224
+      },
+      "id": "23584c1d-932e-41be-a0d3-1600eecf20ca",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -704,
+        752
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n1. Understands natural language (user’s text) and extracts information (name, date, doctor, etc.) from free-form chat. \n\n2. Patients type messages in many ways (“I want to see Dr. Sharma next Monday at 10”). The AI model parses the message, figures out the intent, and picks out key info.",
+        "height": 448,
+        "width": 208,
+        "color": 2
+      },
+      "id": "9351f54d-5a84-4556-952c-34140a8b30a3",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -448,
+        752
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1. Creates the actual appointment in Google Calendar once all details are collected and slot is confirmed as available.  \n\n2. This is where the final booking happens. It lets the doctor see their schedule and avoids manual entry.",
+        "height": 448,
+        "width": 208,
+        "color": 7
+      },
+      "id": "a7650caa-1a0c-461a-88cf-e19d1ac48dff",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -224,
+        752
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "1. This node “wakes up” your workflow whenever a user sends a message (via chat, web, or other integrations).  \n\n2. It’s the entry point—without it, your automation would not know when a patient is trying to book an appointment. It listens for messages and starts the workflow.",
+        "height": 384,
+        "width": 256,
+        "color": 7
+      },
+      "id": "ee433126-2025-4ca4-a416-0395da45b0f8",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -656,
+        160
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1. Before booking, checks if the doctor is already busy at the requested date/time. \n\n2. Prevents double-booking and ensures the slot is truly free before confirming.",
+        "height": 448,
+        "width": 208,
+        "color": 2
+      },
+      "id": "17c12c5c-5c13-4975-bd1f-35ef3dc39f7a",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        16,
+        752
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1. Sends a confirmation outlook email to the patient (and optionally the doctor) with all appointment details. \n\n2. Gives immediate feedback, acts as a record, and reassures the patient that the appointment is set.",
+        "height": 448,
+        "width": 208,
+        "color": 6
+      },
+      "id": "ce70686f-5c5c-45f6-a016-328ab2cff8f7",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        272,
+        752
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1. Logs every booking in a Google Sheet for records, reporting, and backup.  \n\n2. Easy for admins/staff to see all appointments, export data, generate reports, or audit bookings.",
+        "height": 448,
+        "width": 208,
+        "color": 2
+      },
+      "id": "8d7849dc-7b69-471e-9433-9d565be5c338",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        768,
+        752
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n1. This is a table that matches each doctor with their medical speciality.\n\n 2. It is useful for hospitals, clinics, appointment systems, or patient references, so patients can easily identify which doctor to contact for their specific health needs.",
+        "height": 448,
+        "width": 208,
+        "color": 7
+      },
+      "id": "7655f05b-82b7-4fc8-acc0-1b7f90e573ac",
+      "name": "Sticky Note9",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        512,
+        752
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "160P37tJAKgS3Mze7I8XctYw8REbiITyNbkDrFNEX0w8",
+          "mode": "list",
+          "cachedResultName": "Doctor Speciality",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/160P37tJAKgS3Mze7I8XctYw8REbiITyNbkDrFNEX0w8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/160P37tJAKgS3Mze7I8XctYw8REbiITyNbkDrFNEX0w8/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values0_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values1_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values2_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values3_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values4_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values5_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values6_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values7_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values8_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values9_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Reason/Visit",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values10_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "combineFilters": "OR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        768
+      ],
+      "id": "616405ba-23fb-409a-a56b-68f2d4d80443",
+      "name": "Google Sheets Preferred Doctor specialist",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GubZvG55poaWUFY3",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a professional appointment scheduling assistant for a medical clinic. Your goal is to help patients book, check, modify, or cancel doctor appointments efficiently.\n\n**Available Tools:**\n1. **Google Calendar - Check Availability**: Check what appointment slots are already booked\n2. **Google Calendar - Book Appointment**: Create a new appointment in the calendar\n3. **Gmail - Send Confirmation**: Send confirmation emails to patients\n4. **MongoDB - Store Appointment**: Save appointment details to the MongoDB database\n5. **Google Sheets - Log Appointment**: Save appointment details to Google Sheets spreadsheet\n\n**Booking Process:**\n1. Greet the patient warmly and ask how you can help\n2. If booking, collect:\n   - Patient full name\n   - Email address\n   - Phone number\n   - Preferred date and time\n   - Reason for visit\n   - Preferred doctor (optional)\n\n3. Use \"Google Calendar - Check Availability\" tool to verify the requested time slot is free\n   - checkStartDate: Start of the day they want (e.g., 2024-01-15T00:00:00)\n   - checkEndDate: End of the day (e.g., 2024-01-15T23:59:59)\n\n4. If available, use \"Google Calendar - Book Appointment\" tool:\n   - startDateTime: Appointment start (e.g., 2024-01-15T10:00:00)\n   - endDateTime: Appointment end (typically 30-60 min later)\n   - appointmentTitle: \"Dr. Appointment - [Patient Name]\"\n   - appointmentDescription: Include patient name, phone, reason for visit\n\n5. After booking the calendar appointment, use \"Google Sheets - Log Appointment\" tool to log the appointment data with patient_name, email, phone, appointment_date, reason, and doctor fields. Also use \"MongoDB - Store Appointment\" tool to save the record to MongoDB:\n   - collection: \"appointments\" (the MongoDB collection name)\n   - documentData: JSON object with all appointment details like {\"patient_name\": \"[name]\", \"email\": \"[email]\", \"phone\": \"[phone]\", \"appointment_date\": \"[datetime]\", \"reason\": \"[reason]\", \"doctor\": \"[doctor]\", \"created_at\": \"[current_timestamp]\"}\n\n6. Use \"Gmail - Send Confirmation\" tool to email the patient:\n   - patientEmail: Their email address\n   - emailSubject: \"Appointment Confirmation - [Date]\"\n   - emailBody: Professional HTML email with:\n     * Appointment date and time\n     * Doctor name\n     * Clinic address: 123 Medical Center Dr, Suite 100\n     * Phone: (555) 123-4567\n     * Preparation instructions if needed\n     * Cancellation policy\n\n**Important Guidelines:**\n- Always confirm all details before booking\n- Be friendly, professional, and empathetic\n- If a time slot is taken, suggest nearby alternatives\n- Provide clear next steps\n- Handle cancellations and rescheduling requests\n\nLet's help patients get the care they need!"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -32,
+        416
+      ],
+      "id": "88bfbf7e-4850-485e-9d34-6b88f5c5c4b6",
+      "name": "Doctor Appointment AI Agent"
+    },
+    {
+      "parameters": {
+        "toRecipients": "=palani@nexxora.inc",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "bodyContent": "={{ $fromAI('Message', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.microsoftOutlookTool",
+      "typeVersion": 2,
+      "position": [
+        320,
+        768
+      ],
+      "id": "b699e72c-82f3-4e15-af3d-8f7859c4fd66",
+      "name": "Send a message in Microsoft Outlook",
+      "webhookId": "db9a1e51-000e-4a67-a792-c2a3805abe46",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "rXDaei5hhnKC16zr",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1. Sends a confirmation Gmail to the patient (and optionally the doctor) with all appointment details. \n\n2. Gives immediate feedback, acts as a record, and reassures the patient that the appointment is set.",
+        "height": 448,
+        "width": 208
+      },
+      "id": "6d43106f-23f1-4c21-acde-3621a9581417",
+      "name": "Sticky Note10",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1024,
+        752
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Doctor Appointment AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Chat Trigger",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "Doctor Appointment AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar - Book Appointment": {
+      "ai_tool": [
+        [
+          {
+            "node": "Doctor Appointment AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar - Check Availability": {
+      "ai_tool": [
+        [
+          {
+            "node": "Doctor Appointment AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail - Send Confirmation": {
+      "ai_tool": [
+        [
+          {
+            "node": "Doctor Appointment AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets - Log Appointment": {
+      "ai_tool": [
+        [
+          {
+            "node": "Doctor Appointment AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Doctor Appointment AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Preferred Doctor specialist": {
+      "ai_tool": [
+        [
+          {
+            "node": "Doctor Appointment AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message in Microsoft Outlook": {
+      "ai_tool": [
+        [
+          {
+            "node": "Doctor Appointment AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a021fd44-c678-4ad9-81c5-7483402413f1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6dccd216326a4b9babf27c39dfce471b3fba8cb2e7f124c62c557dab5cc2c6fe"
+  },
+  "id": "fVlZy2WeJgqAU3vA",
+  "tags": []
+}

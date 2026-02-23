@@ -1,8 +1,8 @@
-🏥 AI-Agent Doctor Appointment Scheduling System 🤖
+# 🏥 AI-Agent Doctor Appointment Scheduling System 🤖
 
 An end-to-end AI-powered Doctor Appointment Scheduling system built using n8n, Agentic AI, and real-time calendar integration to automate patient booking, availability checking, and confirmation without manual intervention.
 
-🚀 Project Overview
+# 🚀 Project Overview
 
 This project automates the complete doctor appointment workflow:
 
@@ -22,7 +22,7 @@ Sends confirmation email
 
 Designed for scalable, real-world healthcare operations.
 
-🧠 Key Features
+# 🧠 Key Features
 
 Conversational AI appointment booking
 
@@ -42,7 +42,7 @@ Alternative slot suggestion
 
 Production-ready Agentic AI architecture
 
-🛠️ Tech Stack
+# 🛠️ Tech Stack
 
 n8n – Workflow automation
 
@@ -56,7 +56,7 @@ Gmail API – Confirmation emails
 
 Agentic AI Design – Decision-based scheduling
 
-🔄 Workflow Architecture
+# 🔄 Workflow Architecture
 Step-by-Step Flow
 
 1️⃣ Chat Trigger
@@ -111,7 +111,7 @@ Timestamp
 
 Appointment details sent instantly
 
-🗄️ Data Storage – Short Explanation
+# 🗄️ Data Storage – Short Explanation
 
 This system stores structured appointment records for tracking and reporting.
 
@@ -131,7 +131,7 @@ Status – Confirmed / Rescheduled
 
 Created At – Timestamp of booking
 
-⚙️ How to Use
+# ⚙️ How to Use
 
 Import workflow JSON into n8n
 
@@ -151,7 +151,7 @@ Start chat interaction
 
 AI handles booking end-to-end
 
-📈 Use Cases
+# 📈 Use Cases
 
 Clinic Appointment Automation
 
@@ -163,7 +163,7 @@ Telemedicine Slot Booking
 
 Healthcare Workflow Digitization
 
-💼 Business Impact
+# 💼 Business Impact
 
 Reduces receptionist workload by 60–70%
 
@@ -175,7 +175,7 @@ Improves patient satisfaction
 
 Creates centralized appointment records
 
-🔐 Conflict Prevention Strategy
+# 🔐 Conflict Prevention Strategy
 
 Real-time calendar validation
 
@@ -185,7 +185,7 @@ Alternative slot recommendation
 
 Centralized logging
 
-🏗 Production-Ready Architecture
+# 🏗 Production-Ready Architecture
 
 Modular workflow design
 

@@ -19,6 +19,8 @@ This system automates the complete appointment lifecycle:
 
 Fully automated. No receptionist intervention required.
 
+---
+
 # ✨ Key Features
 
 - Conversational AI appointment booking
@@ -29,6 +31,8 @@ Fully automated. No receptionist intervention required.
 - Instant confirmation email (Gmail API)
 - Memory-enabled multi-step conversation
 - 24/7 autonomous scheduling
+  
+---
 
 # 🏗 Tech Stack
 
@@ -38,6 +42,8 @@ Fully automated. No receptionist intervention required.
 - Google Sheets API – Appointment logging
 - Gmail API – Confirmation email automation
 - Agent AI Architecture – Decision-driven scheduling
+
+---
 
 # 🔄 Workflow Architecture
 1️⃣ **Chat Trigger**
@@ -91,6 +97,8 @@ Provides centralized tracking and reporting.
 - Sends appointment details to patient
 - Provides confirmation and summary
 
+---
+
 # 🗄 Data Structure
 Field	Description
 - Patient Name	Full name of patient
@@ -100,7 +108,9 @@ Field	Description
 - Appointment Date	Scheduled date 
 - Appointment Time	Scheduled time
 - Status	Confirmed / Rescheduled
-- Created At	Booking timestamp
+- Created At	Booking timestamp 
+
+---
 
 # 🔐 Conflict Prevention Strategy
 
@@ -108,7 +118,9 @@ Field	Description
 - Slot verification before booking
 - Alternative time suggestion
 - Centralized logging
-- Eliminates double bookings and scheduling overlaps.
+- Eliminates double bookings and scheduling overlaps. 
+
+---
 
 # ⚙️ How to Use
 1️⃣ **Import Workflow**
@@ -130,7 +142,9 @@ Enable the workflow in n8n.
 
 4️⃣ **Start Chat**
 
-Initiate booking conversation — the AI handles everything automatically.
+Initiate booking conversation — the AI handles everything automatically.  
+
+---
 
 # 📈 Use Cases
 
@@ -138,7 +152,9 @@ Initiate booking conversation — the AI handles everything automatically.
 - Hospital Scheduling Systems
 - Private Practitioner Management
 - Telemedicine Slot Booking
-- Healthcare Workflow Digitization
+- Healthcare Workflow Digitization 
+
+---
 
 # 💼 Business Impact
 
@@ -146,7 +162,9 @@ Initiate booking conversation — the AI handles everything automatically.
 - Zero double bookings
 - 24/7 automated appointment booking
 - Faster patient response time
-- Centralized reporting & audit trail
+- Centralized reporting & audit trail 
+
+---
 
 # 🏗 Production-Ready Design
 
@@ -157,12 +175,17 @@ Initiate booking conversation — the AI handles everything automatically.
 - SMS / WhatsApp integration ready
 - Cloud-deployable architecture
 
+--- 
+
 # 📌 Repository Contents
 
 - workflow.json – n8n workflow export
-- README.md – Project documentation
+- README.md – Project documentation 
+
+---
 
 # 🎯 Summary
 
 - This AI Agent replaces traditional receptionist-based scheduling with an intelligent, real-time, automated system.
-- Built using Agent AI principles, this workflow demonstrates scalable healthcare automation using n8n and Google APIs.
+- Built using Agent AI principles, this workflow demonstrates scalable healthcare automation using n8n and Google APIs. 
+---

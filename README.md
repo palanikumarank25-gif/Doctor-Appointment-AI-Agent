@@ -111,11 +111,11 @@ Field	Description
 - Eliminates double bookings and scheduling overlaps.
 
 # ⚙️ How to Use
-1️⃣ Import Workflow
+1️⃣ **Import Workflow**
 
 Import the workflow JSON into n8n.
 
-2️⃣ Configure Credentials
+2️⃣ **Configure Credentials**
 
 Set up:
 
@@ -124,11 +124,11 @@ Set up:
 - Google Sheets credentials
 - Gmail credentials
 
-3️⃣ Activate Workflow
+3️⃣ **Activate Workflow**
 
 Enable the workflow in n8n.
 
-4️⃣ Start Chat
+4️⃣ **Start Chat**
 
 Initiate booking conversation — the AI handles everything automatically.
 

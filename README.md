@@ -105,18 +105,12 @@ Updates doctor schedule instantly
 7️⃣ Log Appointment (Google Sheets)
 
 Stores:
-
-Patient Name
-
-Doctor Name
-
-Appointment Date
-
-Appointment Time
-
-Status
-
-Timestamp
+- Patient Name
+- Doctor Name
+- Appointment Date
+- Appointment Time
+- Status
+- Timestamp
 
 Provides centralized tracking and reporting.
 
@@ -128,14 +122,15 @@ Provides confirmation and summary
 
 # 🗄 Data Structure
 Field	Description
-Patient Name	Full name of patient
-Email	Contact email
-Phone	Contact number
-Doctor Name	Selected doctor
-Appointment Date	Scheduled date
-Appointment Time	Scheduled time
-Status	Confirmed / Rescheduled
-Created At	Booking timestamp
+- Patient Name	Full name of patient
+- Email	Contact email
+- Phone	Contact number
+- Doctor Name	Selected doctor
+- Appointment Date	Scheduled date 
+- Appointment Time	Scheduled time
+- Status	Confirmed / Rescheduled
+- Created At	Booking timestamp
+
 # 🔐 Conflict Prevention Strategy
 
 Real-time calendar validation

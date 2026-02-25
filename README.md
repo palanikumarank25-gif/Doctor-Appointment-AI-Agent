@@ -9,53 +9,35 @@ Designed for clinics, hospitals, and private practitioners to eliminate manual b
 
 This system automates the complete appointment lifecycle:
 
-💬 Patient initiates booking via chat
-
-🧠 AI collects required details
-
-📅 System checks real-time doctor availability
-
-❌ Prevents double booking
-
-✅ Books confirmed slot
-
-📊 Logs appointment data
-
-📧 Sends instant confirmation
+- 💬 Patient initiates booking via chat
+- 🧠 AI collects required details
+- 📅 System checks real-time doctor availability
+- ❌ Prevents double booking
+- ✅ Books confirmed slot
+- 📊 Logs appointment data
+- 📧 Sends instant confirmation
 
 Fully automated. No receptionist intervention required.
 
 # ✨ Key Features
 
-Conversational AI appointment booking
-
-Real-time availability validation (Google Calendar)
-
-Automatic conflict detection
-
-Intelligent alternative slot suggestion
-
-Google Sheets appointment logging
-
-Instant confirmation email (Gmail API)
-
-Memory-enabled multi-step conversation
-
-24/7 autonomous scheduling
+- Conversational AI appointment booking
+- Real-time availability validation (Google Calendar)
+- Automatic conflict detection
+- Intelligent alternative slot suggestion
+- Google Sheets appointment logging
+- Instant confirmation email (Gmail API)
+- Memory-enabled multi-step conversation
+- 24/7 autonomous scheduling
 
 # 🏗 Tech Stack
 
-n8n – Workflow automation
-
-Google Gemini Model – Conversational AI
-
-Google Calendar API – Slot validation & booking
-
-Google Sheets API – Appointment logging
-
-Gmail API – Confirmation email automation
-
-Agentic AI Architecture – Decision-driven scheduling
+- n8n – Workflow automation
+- Google Gemini Model – Conversational AI
+- Google Calendar API – Slot validation & booking
+- Google Sheets API – Appointment logging
+- Gmail API – Confirmation email automation
+- Agent AI Architecture – Decision-driven scheduling
 
 # 🔄 Workflow Architecture
 1️⃣ Chat Trigger
@@ -66,15 +48,11 @@ Patient initiates conversation.
 
 AI collects:
 
-Patient Name
-
-Email / Phone
-
-Preferred Doctor
-
-Preferred Date
-
-Preferred Time
+1. Patient Name
+2. Email / Phone
+3. Preferred Doctor
+4. Preferred Date
+5. Preferred Time
 
 Booking Action (Book / Check / Modify / Cancel)
 
@@ -133,15 +111,11 @@ Field	Description
 
 # 🔐 Conflict Prevention Strategy
 
-Real-time calendar validation
-
-Slot verification before booking
-
-Alternative time suggestion
-
-Centralized logging
-
-Eliminates double bookings and scheduling overlaps.
+- Real-time calendar validation
+- Slot verification before booking
+- Alternative time suggestion
+- Centralized logging
+- Eliminates double bookings and scheduling overlaps.
 
 # ⚙️ How to Use
 1️⃣ Import Workflow
@@ -152,13 +126,10 @@ Import the workflow JSON into n8n.
 
 Set up:
 
-Google Gemini API
-
-Google Calendar credentials
-
-Google Sheets credentials
-
-Gmail credentials
+- Google Gemini API
+- Google Calendar credentials
+- Google Sheets credentials
+- Gmail credentials
 
 3️⃣ Activate Workflow
 
@@ -170,50 +141,35 @@ Initiate booking conversation — the AI handles everything automatically.
 
 # 📈 Use Cases
 
-Clinic Appointment Automation
-
-Hospital Scheduling Systems
-
-Private Practitioner Management
-
-Telemedicine Slot Booking
-
-Healthcare Workflow Digitization
+- Clinic Appointment Automation
+- Hospital Scheduling Systems
+- Private Practitioner Management
+- Telemedicine Slot Booking
+- Healthcare Workflow Digitization
 
 # 💼 Business Impact
 
-60–70% reduction in manual scheduling workload
-
-Zero double bookings
-
-24/7 automated appointment booking
-
-Faster patient response time
-
-Centralized reporting & audit trail
+- 60–70% reduction in manual scheduling workload
+- Zero double bookings
+- 24/7 automated appointment booking
+- Faster patient response time
+- Centralized reporting & audit trail
 
 # 🏗 Production-Ready Design
 
-Modular workflow structure
-
-Multi-doctor scalability
-
-Expandable to multi-location support
-
-EMR / HIS integration ready
-
-SMS / WhatsApp integration ready
-
-Cloud-deployable architecture
+- Modular workflow structure
+- Multi-doctor scalability
+- Expandable to multi-location support
+- EMR / HIS integration ready
+- SMS / WhatsApp integration ready
+- Cloud-deployable architecture
 
 # 📌 Repository Contents
 
-workflow.json – n8n workflow export
-
-README.md – Project documentation
+- workflow.json – n8n workflow export
+- README.md – Project documentation
 
 # 🎯 Summary
 
 - This AI Agent replaces traditional receptionist-based scheduling with an intelligent, real-time, automated system.
-
 - Built using Agent AI principles, this workflow demonstrates scalable healthcare automation using n8n and Google APIs.

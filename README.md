@@ -1,7 +1,7 @@
 # 🏥 Hospital Booking AI Agent 🤖
 AI-Powered Doctor Appointment Scheduling System
 
-An end-to-end Agentic AI workflow built in n8n that automates doctor appointment scheduling using conversational AI, real-time calendar validation, and automated confirmation.
+An end-to-end Agent AI workflow built in n8n that automates doctor appointment scheduling using conversational AI, real-time calendar validation, and automated confirmation.
 
 Designed for clinics, hospitals, and private practitioners to eliminate manual booking processes and prevent scheduling conflicts.
 
@@ -40,11 +40,11 @@ Fully automated. No receptionist intervention required.
 - Agent AI Architecture – Decision-driven scheduling
 
 # 🔄 Workflow Architecture
-1️⃣ Chat Trigger
+1️⃣ **Chat Trigger**
 
 Patient initiates conversation.
 
-2️⃣ AI Doctor Scheduler Agent
+2️⃣ **AI Doctor Scheduler Agent**
 
 AI collects:
 
@@ -53,34 +53,29 @@ AI collects:
 3. Preferred Doctor
 4. Preferred Date
 5. Preferred Time
-
 Booking Action (Book / Check / Modify / Cancel)
 
-3️⃣ Conversation Memory
+3️⃣ **Conversation Memory**
 
 Maintains structured multi-step interaction to avoid losing context.
 
-4️⃣ Availability Check (Google Calendar)
+4️⃣ **Availability Check (Google Calendar)**
 
-Validates selected time slot
+- Validates selected time slot
+- Detects overlapping bookings
+- Ensures real-time accuracy
 
-Detects overlapping bookings
+5️⃣ **Decision Logic**
 
-Ensures real-time accuracy
+- If slot available → Proceed to booking
+- If unavailable → Suggest alternative time slots
 
-5️⃣ Decision Logic
+6️⃣ **Create Appointment Event**
 
-If slot available → Proceed to booking
+- Books event in Google Calendar
+- Updates doctor schedule instantly
 
-If unavailable → Suggest alternative time slots
-
-6️⃣ Create Appointment Event
-
-Books event in Google Calendar
-
-Updates doctor schedule instantly
-
-7️⃣ Log Appointment (Google Sheets)
+7️⃣ **Log Appointment (Google Sheets)**
 
 Stores:
 - Patient Name
@@ -89,14 +84,12 @@ Stores:
 - Appointment Time
 - Status
 - Timestamp
-
 Provides centralized tracking and reporting.
 
-8️⃣ Send Confirmation Email
+8️⃣ **Send Confirmation Email**
 
-Sends appointment details to patient
-
-Provides confirmation and summary
+- Sends appointment details to patient
+- Provides confirmation and summary
 
 # 🗄 Data Structure
 Field	Description
